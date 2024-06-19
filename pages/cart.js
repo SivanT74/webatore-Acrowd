@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import Head from 'next/head';
+import Image from 'next/image';
 import styles from '../styles/cartPage.module.css'; // Ensure correct path
 
 const CartPage = () => {
@@ -67,7 +68,7 @@ const CartPage = () => {
                   <td className={styles.cartItemImage}>
                     <Link href={`/product/${item.slug}`}>
                       <a>
-                        <img src={item.image} alt={item.name} />
+                        <Image width={150} height={150} src={item.image} alt={item.name} />
                       </a>
                     </Link>
                   </td>

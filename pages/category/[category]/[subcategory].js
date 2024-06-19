@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import Head from 'next/head';
+import Image from 'next/image';
 import styles from '../../../styles/SubcategoryPage.module.css';
 
 const SubcategoryPage = () => {
@@ -62,7 +63,7 @@ const SubcategoryPage = () => {
             <Link href={`/product/${product.slug}`}>
               <a className={styles.imageContainer}>
                 {product.images && product.images.length > 0 && (
-                  <img src={product.images[0].src} alt={product.name} />
+                  <Image width={150} height={150} src={product.images[0].src} alt={product.name} />
                 )}
               </a>
             </Link>

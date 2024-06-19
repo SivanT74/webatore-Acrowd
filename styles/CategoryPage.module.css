@@ -54,7 +54,7 @@
   position: relative;
 }
 
-.imageContainer img {
+.imageContainer Image {
   position: absolute;
   top: 0;
   left: 0;
