@@ -60,7 +60,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: |
-            ../.next/cache
+            .next/cache
           key: ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json', '**/yarn.lock') }}-${{ hashFiles('**.[jt]s', '**.[jt]sx') }}
           restore-keys: |
             ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json', '**/yarn.lock') }}-
@@ -72,23 +72,11 @@ jobs:
         run: |
           echo "Running next build with debug information"
           ${{ steps.detect-package-manager.outputs.runner }} next build --debug
-        continue-on-error: true
-        id: build
-
-      - name: Check build status
-        run: echo "Build status ${{ steps.build.outcome }}"
-
-      - name: List root directory contents after build
-        run: ls -la
-
-      - name: List .next directory contents
-        run: ls -la ../.next || echo ".next directory not found"
 
       - name: Upload artifact
-        if: success()
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ../.next
+          path: ./.next
 
   deploy:
     environment:
@@ -101,5 +89,5 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v4
         with:
-            github_token: ${{ secrets.GITHUB_TOKEN }}
-            publish_dir: ../.next
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./.next

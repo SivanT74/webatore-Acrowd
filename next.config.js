@@ -1,10 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: 'export',
-  distDir: 'build',
+  distDir: '.next', // This is actually unnecessary because '.next' is the default
   images: {
-    unopimized: true,
-  }
+    unoptimized: true,
+  },
 }
 
-module.exports = nextConfig
+module.exports = nextConfig;
