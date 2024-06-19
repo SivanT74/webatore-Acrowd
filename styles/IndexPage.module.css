@@ -1,0 +1,60 @@
+.homePage {
+    text-align: center;
+    padding: 50px 20px;
+}
+  
+.homePage h1 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+  
+.homePage p {
+    font-size: 1.2em;
+    margin-bottom: 40px;
+}
+  
+.homeLinks {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+  
+.homeLink {
+    display: inline-block;
+    padding: 15px 25px;
+    background-color: #333;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 1.1em;
+    width: calc(100% - 40px); /* Adjust width for mobile */
+    text-align: center;
+}
+  
+.homeLink:hover {
+    background-color: #555;
+}
+  
+/* wide screen */
+@media (min-width: 768px) {
+    .homeLink {
+        width: auto; /* Adjust width for larger screens */
+    }
+  
+    .homeLinks {
+        flex-direction: row; /* buttons in row */
+    }
+}
+
+/* thin screen */
+@media (max-width: 767px) {
+    .homeLink {
+        width: 100%; /* Full width on smaller screens */
+        margin: 10px 0;
+    }
+  
+    .homeLinks {
+        flex-direction: column; /* buttons over/under */
+    }
+}

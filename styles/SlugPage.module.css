@@ -1,0 +1,280 @@
+.imageContainer {
+  width: 100%;
+  padding-top: 100%;
+  position: relative;
+}
+
+.imageContainer img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.roductPage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.backButton {
+  position: absolute;
+  left: 10px; /* Adjust left position as needed */
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: black;
+  font-size: 1.5em;
+  cursor: pointer;
+}
+
+.backButton:hover {
+  text-decoration: underline;
+}
+
+.productDetail {
+  display: flex;
+  gap: 40px;
+  width: 100%;
+  max-width: 1200px;
+}
+
+.leftSide {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 45%;
+}
+
+.imageContainer {
+  width: 100%;
+  padding-top: 100%;
+  position: relative;
+}
+
+.imageContainer img {
+  position: absolute;
+  top: 4%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.relatedProductsTitle {
+  font-weight: bold;
+  margin-top: 20px;
+  align-self: flex-start;
+}
+
+.relatedProductsSection {
+  width: 100%;
+  max-width: 1200px;
+}
+
+.relatedProducts {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  padding: 10px 0;
+}
+
+.relatedProductItem {
+  min-width: 120px;
+  text-align: left;
+}
+
+.relatedProductItem img {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+}
+
+.relatedProductName {
+  margin-top: 5px;
+  font-size: 1em;
+  width: 100px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
+}
+
+.relatedProductPrice {
+  margin-top: 5px;
+  font-size: 0.9em;
+}
+
+.regularPrice {
+  text-decoration: line-through;
+  color: gray;
+  margin-right: 5px;
+}
+
+.salePrice {
+  color: black;
+}
+
+.productInfo {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin-left: 20px;
+}
+
+.breadcrumb {
+  font-size: 1em;
+  color: gray;
+  margin-bottom: 10px;
+}
+
+.productInfo h2 {
+  font-size: 1.5em;
+  margin: 8px 0;
+}
+
+.productInfo p {
+  margin: 16px 0;
+}
+
+.price {
+  margin-top: 4px;
+  font-size: 1.2em;
+}
+
+.addToCartContainer {
+  display: flex;
+  align-items: center;
+  margin-top: 16px;
+}
+
+.quantitySelector {
+  display: flex;
+  align-items: center;
+  border: 1px solid #000;
+}
+
+.quantitySelector button {
+  width: 30px;
+  height: 40px;
+  background-color: white;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.quantitySelector button:hover {
+  background-color: #333;
+  color: #fff;
+}
+
+.quantitySelector span {
+  margin: 0 10px;
+  font-size: 1.2em;
+}
+
+.addToCartButton {
+  background-color: black;
+  color: white;
+  border: none;
+  padding: 0 20px;
+  font-size: 16px;
+  cursor: pointer;
+  height: 42px;
+}
+
+.addToCartButton:hover {
+  background-color: #333;
+  color: #fff;
+}  
+.prevButton, .nextButton {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  font-size: 2em;
+  padding: 0 10px;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.prevButton {
+  left: 10px;
+}
+
+.nextButton {
+  right: 10px;
+}
+
+.prevButton:hover, .nextButton:hover {
+  background: rgba(0, 0, 0, 0.7);
+}
+/* Mobile */
+@media (max-width: 768px) {
+  .productDetail {
+    flex-direction: column;
+  }
+  
+  .productInfo {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .leftSide {
+    width: 100%;
+  }
+
+  .imageContainer {
+    width: 100%;
+    padding-top: 56.25%; 
+  }
+  .backButton {
+    left: 10px;
+    font-size: 1.5em; 
+  }
+  .addToCartContainer {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .quantitySelector {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 10px;
+    border: 1px solid #000;
+    padding: 0 10px; /* Added padding to make space for the buttons */
+  }
+
+  .quantitySelector button {
+    width: 50px;
+    height: 50px;
+    font-size: 24px;
+  }
+  .quantitySelector button:hover {
+    background-color: none;
+    color: none;
+  }
+
+  .quantitySelector span {
+    flex: 1;
+    text-align: center;
+    font-size: 1.5em;
+    line-height: 50px;
+  }
+
+  .addToCartButton {
+    width: 100%;
+    font-size: 18px;
+    height: 50px;
+  }
+}
+  

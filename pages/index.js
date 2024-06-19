@@ -1,45 +1,25 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import styles from '../styles/Home.module.css'
+import Link from 'next/link';
+import Head from 'next/head';
+import styles from '../styles/IndexPage.module.css';
 
-export default function Home() {
+const HomePage = () => {
   return (
-    <div className={styles.container}>
+    <div className={styles.homePage}>
       <Head>
-        <title>Acrowd Interview Test</title>
-        <link rel="icon" href="/favicon.ico" />
+        <title>Welcome to Our Shop</title>
+        <meta name="description" content="Discover our wide range of products and amazing deals. Shop now at our online store." />
+        <meta name="keywords" content="shop, online store, products, deals" />
       </Head>
-
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://acrowd.se">Acrowd!</a>
-        </h1>
-
-        <p className={styles.description}>
-          Get started by reading the{' '}
-          <code className={styles.code}>README.md</code>{' '}file
-        </p>
-
-        <div className={styles.grid}>
-          <a href="https://github.com/Black-Pixel-AB/shop-interview" target="_blank" rel="noreferrer" className={styles.card}>
-            <h2>Instructions &rarr;</h2>
-            <p>Check out the instructions for the project!</p>
-          </a>
-
-
-          <a
-            href="https://www.figma.com/file/z7jZJGxVyjScHaNlVVlh6d/Shop-Interview?node-id=0%3A1"
-            target="_blank" 
-            rel="noreferrer"
-            className={styles.card}
-          >
-            <h2>Design &rarr;</h2>
-            <p>
-              The store is based on the attached design
-            </p>
-          </a>
-        </div>
-      </main>
+      <h1>Welcome to Our Shop!</h1>
+      <p>Discover our wide range of products and amazing deals.</p>
+      <div className={styles.homeLinks}>
+        <Link href="/shop"><a className={styles.homeLink}>Browse Categories</a></Link>
+        <Link href="/cart"><a className={styles.homeLink}>Your Cart</a></Link>
+        <Link href="/checkout"><a className={styles.homeLink}>Checkout</a></Link>
+      </div>
     </div>
-  )
-}
+  );
+};
+
+// makes page easy to import
+export default HomePage;

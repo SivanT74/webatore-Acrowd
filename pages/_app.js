@@ -1,7 +1,14 @@
-import '../styles/globals.css'
+import Layout from '../components/Layout';
+import '../styles/globals.css';
 
+// makes the layout consisten true out pages
 function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />
+  return (
+    <Layout>
+      <Component {...pageProps} />
+    </Layout>
+  );
 }
 
-export default MyApp
+// makes easy to import
+export default MyApp;
