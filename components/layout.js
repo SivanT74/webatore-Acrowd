@@ -1,4 +1,4 @@
-import Navbar from './Navbar';
+import Navbar from './navbar';
 
 // laysout every page so navbar on top of page content
 const Layout = ({ children }) => {
