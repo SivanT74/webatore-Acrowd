@@ -69,7 +69,14 @@ jobs:
         run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
 
       - name: Build with Next.js
-        run: ${{ steps.detect-package-manager.outputs.runner }} next build
+        run: |
+          echo "Running next build with debug information"
+          ${{ steps.detect-package-manager.outputs.runner }} next build --debug
+        continue-on-error: true
+        id: build
+
+      - name: Check build status
+        run: echo "Build status: ${{ steps.build.outcome }}"
 
       - name: List root directory contents after build
         run: ls -la
@@ -78,6 +85,7 @@ jobs:
         run: ls -la ./.next || echo ".next directory not found"
 
       - name: Upload artifact
+        if: success()
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./.next
