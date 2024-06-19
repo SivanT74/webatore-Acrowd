@@ -21,7 +21,7 @@ The project should be treated as a real project so any best practices that can b
     - Username: `acrowd`
     - Password: `$P$BBFSHDQjE4AXKQUfI`
 
----
+----
 
 ## Specification
 
