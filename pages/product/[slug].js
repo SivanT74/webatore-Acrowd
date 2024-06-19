@@ -6,19 +6,19 @@ import Head from 'next/head';
 import styles from '../../styles/SlugPage.module.css'; // Ensure correct path
 
 const ProductPage = () => {
-  const [product, setProduct] = useState(null); // makes product start ass null
+  const [product, setProduct] = useState(null); // makes product start as null
   const [relatedProducts, setRelatedProducts] = useState([]); // for related products
   const [loading, setLoading] = useState(true); // loading
   const [error, setError] = useState(null); // for if error
-  const [quantity, setQuantity] = useState(1); // sets quantety to 1
-  const [currentImageIndex, setCurrentImageIndex] = useState(0); // makes the 1 img in list apper first
+  const [quantity, setQuantity] = useState(1); // sets quantity to 1
+  const [currentImageIndex, setCurrentImageIndex] = useState(0); // makes the 1st img in list appear first
   const router = useRouter(); // navigation
-  const { slug } = router.query; // uniq slug navigation
+  const { slug } = router.query; // unique slug navigation
 
   useEffect(() => {
     if (!slug) return;
 
-    const fetchProduct = async () => { // makes conection
+    const fetchProduct = async () => { // makes connection
       try {
         const consumerKey = 'ck_4c0d8a4f83c78831c200e39d1f371e92d419d863';
         const consumerSecret = 'cs_1eb6c96b9a32942b52a868da3ad28698b15873ff';
@@ -38,7 +38,7 @@ const ProductPage = () => {
           setCurrentImageIndex(0); // Reset currentImageIndex whenever a new product is loaded
 
           const mainCategoryId = productData.categories[0].id; // Get the main category ID
-          fetchRelatedProducts(mainCategoryId); // Fetch related products based on the main category ID
+          fetchRelatedProducts(mainCategoryId, productData); // Fetch related products based on the main category ID
         } else {
           setError('Product not found');
         }
@@ -50,7 +50,7 @@ const ProductPage = () => {
     };
 
     // gets related products
-    const fetchRelatedProducts = async (categoryId) => {
+    const fetchRelatedProducts = async (categoryId, currentProduct) => {
       try {
         const consumerKey = 'ck_4c0d8a4f83c78831c200e39d1f371e92d419d863';
         const consumerSecret = 'cs_1eb6c96b9a32942b52a868da3ad28698b15873ff';
@@ -67,7 +67,10 @@ const ProductPage = () => {
           },
         });
 
-        setRelatedProducts(response.data);
+        // Filter out the current product from the related products list
+        const filteredProducts = response.data.filter(product => product.id !== currentProduct.id);
+
+        setRelatedProducts(filteredProducts);
       } catch (error) {
         setError(error);
       }
@@ -76,7 +79,7 @@ const ProductPage = () => {
     fetchProduct();
   }, [slug]);
 
-  // handels quantety change
+  // handles quantity change
   const handleQuantityChange = (change) => {
     setQuantity((prevQuantity) => {
       const newQuantity = prevQuantity + change;
@@ -84,7 +87,7 @@ const ProductPage = () => {
     });
   };
 
-  // add to localstorage
+  // add to local storage
   const handleAddToCart = () => {
     const cart = JSON.parse(localStorage.getItem('cart')) || [];
     const itemInCart = cart.find(item => item.id === product.id);
@@ -123,7 +126,7 @@ const ProductPage = () => {
     return <p>Error: {error.message}</p>;
   }
 
-  // sets breadcrums
+  // sets breadcrumbs
   const breadcrumb = `Shop / ${product.categories.map(cat => cat.name).join(' / ')}`;
 
   // removes <p> tags from description
