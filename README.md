@@ -25,7 +25,7 @@ The project should be treated as a real project so any best practices that can b
 
 ## Specification
 
-You are to build an ecommerce platform based on the provided design. The store must fetch data from the provided WooCommerce instance. The following functions are required:
+You are to build an e-commerce platform based on the provided design. The store must fetch data from the provided WooCommerce instance. The following functions are required:
 
 - Load and display products
     - Categorize products with a router and allow for nested categories, eg. `/shop/women/hoodies`
