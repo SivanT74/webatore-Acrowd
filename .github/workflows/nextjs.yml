@@ -76,7 +76,7 @@ jobs:
         id: build
 
       - name: Check build status
-        run: echo "Build status: ${{ steps.build.outcome }}"
+        run: echo "Build status ${{ steps.build.outcome }}"
 
       - name: List root directory contents after build
         run: ls -la
