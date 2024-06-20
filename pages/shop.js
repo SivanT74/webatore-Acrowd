@@ -14,9 +14,9 @@ const IndexPage = () => {
   useEffect(() => { //runns only after render
     const fetchProducts = async () => { // fetches list of product
       try {
-        const consumerKey = 'ck_4c0d8a4f83c78831c200e39d1f371e92d419d863'; 
-        const consumerSecret = 'cs_1eb6c96b9a32942b52a868da3ad28698b15873ff'; 
-        const apiUrl = 'https://shop-interview.acrowd.se/wp-json/wc/v3/products'; 
+        const consumerKey = process.env.NEXT_PUBLIC_CONSUMER_KEY;
+        const consumerSecret = process.env.NEXT_PUBLIC_CONSUMER_SECRET;
+        const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
         const response = await axios.get(apiUrl, { // uses axios lib to req data
           auth: {
