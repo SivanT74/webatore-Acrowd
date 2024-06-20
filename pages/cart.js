@@ -77,7 +77,7 @@ const CartPage = () => {
                     </Link>
                   </td>
                   <td className={styles.cartItemPrice}>${item.price.toFixed(2)}</td>
-                  <td idName={styles.cartItemQuantity}>
+                  <td id={styles.cartItemQuantity}>
                     <div className={styles.quantity}>
                       <button onClick={() => handleQuantityChange(item.id, item.quantity - 1)}>-</button>
                       <span>{item.quantity}</span>
