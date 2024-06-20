@@ -3,7 +3,6 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import Head from 'next/head';
-import Image from 'next/image';
 import styles from '../../styles/SlugPage.module.css'; // Ensure correct path
 
 const ProductPage = () => {
@@ -150,7 +149,7 @@ const ProductPage = () => {
             {product.images && product.images.length > 0 && (
               <>
                 {product.images[currentImageIndex] && (
-                  <Image width={150} height={150} src={product.images[currentImageIndex].src} alt={product.name} />
+                  <img src={product.images[currentImageIndex].src} alt={product.name} />
                 )}
                 {product.images.length > 1 && (
                   <>
@@ -193,7 +192,7 @@ const ProductPage = () => {
             <div key={relatedProduct.id} className={styles.relatedProductItem}>
               <Link href={`/product/${relatedProduct.slug}`}>
                 <a>
-                  <Image width={150} height={150} src={relatedProduct.images[0]?.src} alt={relatedProduct.name} />
+                  <img src={relatedProduct.images[0]?.src} alt={relatedProduct.name} />
                   <p className={styles.relatedProductName}>{relatedProduct.name}</p>
                   <p className={styles.relatedProductPrice}>
                     {relatedProduct.sale_price ? (

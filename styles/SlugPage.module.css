@@ -47,7 +47,7 @@
   left: 7%;
 }
 
-.imageContainer Image {
+.imageContainer img {
   position: absolute;
   top: 4%;
   left: 0;
@@ -81,7 +81,7 @@
   text-align: left;
 }
 
-.relatedProductItem Image {
+.relatedProductItem img {
   width: 150px;
   height: 150px;
   object-fit: cover;

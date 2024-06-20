@@ -45,7 +45,7 @@
     text-align: left;
 }
   
-.cartItemImage image {
+.cartItemImage img {
     width: 150px;
     height: 150px;
     object-fit: cover;
@@ -136,7 +136,7 @@
         padding: 5px;
     }
   
-    .cartItemImage Image {
+    .cartItemImage img {
         width: 100px;
         height: 100px;
     }
