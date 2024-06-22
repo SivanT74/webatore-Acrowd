@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import Link from 'next/link';
 import Head from 'next/head';
 import styles from '../styles/cartPage.module.css'; // Ensure correct path
+import { dispatchCartUpdateEvent } from '../components/cartUtils'; // Import the utility function
 
 const CartPage = () => {
   const [cart, setCart] = useState([]); // gets cart
@@ -24,6 +25,7 @@ const CartPage = () => {
     const updatedCart = cart.filter(item => item.id !== productId);
     setCart(updatedCart);
     localStorage.setItem('cart', JSON.stringify(updatedCart));
+    dispatchCartUpdateEvent(); // Dispatch custom event
   };
 
   // manages the amount of item
@@ -32,6 +34,7 @@ const CartPage = () => {
     const updatedCart = cart.map(item => item.id === productId ? { ...item, quantity } : item);
     setCart(updatedCart);
     localStorage.setItem('cart', JSON.stringify(updatedCart));
+    dispatchCartUpdateEvent(); // Dispatch custom event
   };
 
   // calculates total item

@@ -43,6 +43,28 @@
     color: #000;
     background: #fff;
 }
+
+.cartIconContainer {
+    position: relative;
+    margin-left: auto; /* Push it to the furthest right */
+}
+
+.cartIcon {
+    font-size: 1.5em;
+    cursor: pointer;
+    color: white;
+}
+
+.cartBadge {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background: red;
+    color: white;
+    border-radius: 50%;
+    padding: 0 5px;
+    font-size: 0.8em;
+}
   
   /* Mobile */
 @media (max-width: 768px) {

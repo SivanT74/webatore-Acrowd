@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import Link from 'next/link';
 import Head from 'next/head';
 import styles from '../../styles/SlugPage.module.css'; // Ensure correct path
+import { dispatchCartUpdateEvent } from '../../components/cartUtils'; // Import the utility function
 
 const ProductPage = () => {
   const [product, setProduct] = useState(null); // makes product start as null
@@ -107,6 +108,7 @@ const ProductPage = () => {
 
     localStorage.setItem('cart', JSON.stringify(cart));
     alert('Item added to cart');
+    dispatchCartUpdateEvent(); // Dispatch custom event
   };
 
   // image button
