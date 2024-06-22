@@ -40,19 +40,22 @@ const IndexPage = ({ products }) => {
             <Link href={`/product/${product.slug}`}>
               <a className={styles.imageContainer}>
                 {product.images && product.images.length > 0 && (
-                  <Image
-                    src={product.images[0].src}
-                    alt={product.name}
-                    layout="fill"
-                    objectFit="cover"
-                    quality={75}
-                    sizes="(max-width: 768px) 100vw, 
-                           (max-width: 1200px) 50vw, 
-                           33vw"
-                    placeholder="blur"
-                    blurDataURL="/placeholder.webp"
-                    loading="lazy" // Ensure lazy loading
-                  />
+                  <>
+                    {console.log('Image URL:', product.images[0].src)}
+                    <Image
+                      src={product.images[0].src}
+                      alt={product.name}
+                      layout="fill"
+                      objectFit="cover"
+                      quality={75}
+                      sizes="(max-width: 768px) 100vw, 
+                             (max-width: 1200px) 50vw, 
+                             33vw"
+                      placeholder="blur"
+                      blurDataURL="/placeholder.webp"
+                      loading="lazy"
+                    />
+                  </>
                 )}
               </a>
             </Link>
