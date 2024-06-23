@@ -4,7 +4,7 @@ import Link from 'next/link';
 import Head from 'next/head';
 import styles from '../styles/ShopPage.module.css';
 import { fetchProducts } from './api/fetchProducts';
-import ImageComponent from '../components/ImageComponent'; // Adjust the path as necessary
+import ImageComponent from './api/ImageComponent'; // Adjust the path as necessary
 
 export async function getStaticProps() {
   const productsData = await fetchProducts();
