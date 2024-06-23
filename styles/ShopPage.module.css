@@ -40,7 +40,7 @@
 .imageContainer {
   width: 100%;
   position: relative;
-  height: 300px; /* Set a fixed height */
+  height: 100%; /* Set a fixed height */
   overflow: hidden; /* Hide any overflow */
 }
 
