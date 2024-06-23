@@ -2,9 +2,9 @@ import Image from 'next/image';
 
 const isProduction = process.env.NODE_ENV === 'production';
 
-const ImageComponent = ({ src, alt }) => {
+const ImageComponent = ({ src, alt, style = {} }) => {
   if (isProduction) {
-    return <img src={src} alt={alt} style={{ width: '100%', height: '100%' }} />;
+    return <img src={src} alt={alt} style={{ width: '100%', height: '100%', ...style }} />;
   } else {
     return (
       <Image
@@ -19,6 +19,7 @@ const ImageComponent = ({ src, alt }) => {
         placeholder="blur"
         blurDataURL="../public/placeholder.webp"
         loading="lazy"
+        style={style}
       />
     );
   }

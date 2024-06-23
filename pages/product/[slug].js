@@ -144,12 +144,13 @@ const ProductPage = ({ product, relatedProducts }) => {
         <p className={styles.relatedProductsTitle}>Related Products</p>
         <div className={styles.relatedProducts}>
           {relatedProducts.map((relatedProduct) => (
-            <div key={relatedProduct.id} id={styles.relatedProductItem}>
+            <div key={relatedProduct.id} className={styles.relatedProductItem}>
               <Link href={`/product/${relatedProduct.slug}`}>
                 <a>
                   <ImageComponent
                     src={relatedProduct.images[0]?.src}
                     alt={relatedProduct.name}
+                    style={{ width: '100px', height: '100px' }} // Apply styles for related products
                   />
                   <p className={styles.relatedProductName}>{relatedProduct.name}</p>
                   <p className={styles.relatedProductPrice}>

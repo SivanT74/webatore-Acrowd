@@ -76,12 +76,12 @@
   padding-left: 7%;
 }
 
-#relatedProductItem {
+.relatedProductItem {
   min-width: 120px;
   text-align: left;
 }
 
-#relatedProductItem img {
+.relatedProductItem img {
   width: 100px; /* Smaller width for related products images */
   height: 100px; /* Smaller height for related products images */
   object-fit: cover;
