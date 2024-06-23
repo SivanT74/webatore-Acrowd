@@ -1,48 +1,34 @@
-import axios from 'axios';
-import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import Head from 'next/head';
 import styles from '../../styles/CategoryPage.module.css';
+import { fetchProducts } from '../api/fetchProducts';
+import ImageComponent from '../api/ImageComponent'; // Adjust the path as necessary
 
-const CategoryPage = () => {
-  const [products, setProducts] = useState([]); // list of product
-  const [loading, setLoading] = useState(true); // loading
-  const [error, setError] = useState(null); // errors
-  const router = useRouter(); // navigation
-  const { category } = router.query; // makes categorys into const
+export async function getStaticPaths() {
+  // Define paths for all the categories
+  const paths = ['accessories', 'men', 'women'].map((category) => ({
+    params: { category },
+  }));
 
-  useEffect(() => {
-    if (!category) return;
+  return { paths, fallback: 'blocking' };
+}
 
-    // gets data
-    const fetchProducts = async () => {
-      try {
-        const response = await axios.get(`https://shop-interview.acrowd.se/wp-json/wc/v3/products`, {
-          auth: {
-            username: 'ck_4c0d8a4f83c78831c200e39d1f371e92d419d863',
-            password: 'cs_1eb6c96b9a32942b52a868da3ad28698b15873ff',
-          },
-          params: { per_page: 20 },
-        });
-        const allProducts = response.data;
-        const filteredProducts = allProducts.filter(product =>
-          product.categories.some(cat => cat.name.toLowerCase() === category.toLowerCase())
-        );
+export async function getStaticProps({ params }) {
+  const { category } = params;
+  const products = await fetchProducts(category);
 
-        setProducts(filteredProducts);
-        setLoading(false);
-      } catch (error) {
-        setError(error);
-        setLoading(false);
-      }
-    };
+  return {
+    props: {
+      products,
+      category,
+    },
+    revalidate: 10,
+  };
+}
 
-    fetchProducts();
-  }, [category]);
-
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error.message}</p>;
+const CategoryPage = ({ products, category }) => {
+  const router = useRouter();
 
   return (
     <div>
@@ -76,7 +62,10 @@ const CategoryPage = () => {
             <Link href={`/product/${product.slug}`}>
               <a className={styles.imageContainer}>
                 {product.images && product.images.length > 0 && (
-                  <img src={product.images[0].src} alt={product.name} />
+                  <ImageComponent
+                    src={product.images[0].src}
+                    alt={product.name}
+                  />
                 )}
               </a>
             </Link>
@@ -108,5 +97,4 @@ const CategoryPage = () => {
   );
 };
 
-// Makes easy to import
 export default CategoryPage;
