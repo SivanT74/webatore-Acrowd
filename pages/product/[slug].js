@@ -144,7 +144,7 @@ const ProductPage = ({ product, relatedProducts }) => {
         <p className={styles.relatedProductsTitle}>Related Products</p>
         <div className={styles.relatedProducts}>
           {relatedProducts.map((relatedProduct) => (
-            <div key={relatedProduct.id} ID={styles.relatedProductItem}>
+            <div key={relatedProduct.id} id={styles.relatedProductItem}>
               <Link href={`/product/${relatedProduct.slug}`}>
                 <a>
                   <ImageComponent
