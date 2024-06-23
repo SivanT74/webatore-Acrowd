@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import Link from 'next/link';
 import Head from 'next/head';
 import styles from '../../styles/SlugPage.module.css'; // Ensure correct path
-import { fetchProductBySlug, fetchRelatedProducts } from '../api/fetchProducts';
+import { fetchProducts, fetchProductBySlug, fetchRelatedProducts } from '../api/fetchProducts';
 import ImageComponent from '../api/ImageComponent'; // Adjust the path as necessary
 import { dispatchCartUpdateEvent } from '../../components/cartUtils'; // Import the utility function
 
