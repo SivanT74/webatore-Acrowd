@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import Link from 'next/link';
 import Head from 'next/head';
 import styles from '../styles/cartPage.module.css'; // Ensure correct path
-import ImageComponent from '../api/ImageComponent'; // Adjust the path as necessary
+import ImageComponent from './api/ImageComponent'; // Adjust the path as necessary
 import { dispatchCartUpdateEvent } from '../components/cartUtils'; // Import the utility function
 
 const CartPage = () => {
