@@ -4,7 +4,7 @@ const isProduction = process.env.NODE_ENV === 'production';
 
 const ImageComponent = ({ src, alt }) => {
   if (isProduction) {
-    return <img src={src} alt={alt} style={{ width: '100%', height: '130px' }} />;
+    return <img src={src} alt={alt} style={{ width: '100%', height: '100%' }} />;
   } else {
     return (
       <Image
