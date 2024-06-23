@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react'; // Import useState and useEffect
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import Head from 'next/head';
