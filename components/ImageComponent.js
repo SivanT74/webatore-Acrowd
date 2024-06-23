@@ -17,7 +17,7 @@ const ImageComponent = ({ src, alt }) => {
                (max-width: 1200px) 50vw, 
                33vw"
         placeholder="blur"
-        blurDataURL="/placeholder.webp"
+        blurDataURL="../public/placeholder.webp"
         loading="lazy"
       />
     );
