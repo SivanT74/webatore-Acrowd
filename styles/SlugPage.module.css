@@ -82,8 +82,8 @@
 }
 
 .relatedProductItem img {
-  width: 100px; /* Smaller width for related products images */
-  height: 100px; /* Smaller height for related products images */
+  width: 150px; /* Smaller width for related products images */
+  height: 150px; /* Smaller height for related products images */
   object-fit: cover;
 }
 
