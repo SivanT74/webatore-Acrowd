@@ -1,50 +1,40 @@
-import axios from 'axios';
-import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import Head from 'next/head';
 import styles from '../../../styles/SubcategoryPage.module.css';
+import { fetchProducts } from '../../api/fetchProducts';
+import ImageComponent from '../../api/ImageComponent'; // Adjust the path as necessary
 
-const SubcategoryPage = () => {
-  const [products, setProducts] = useState([]); // list of products
-  const [loading, setLoading] = useState(true);// loading
-  const [error, setError] = useState(null); // error
-  const router = useRouter(); // navigation
-  const { category, subcategory } = router.query; // sets categorys in cons
+export async function getStaticPaths() {
+  // Define paths for all the subcategories
+  const categories = ['accessories', 'men', 'women'];
+  const subcategories = ['shirts', 'hoodies'];
 
-  useEffect(() => {
-    if (!category || !subcategory) return; // if no categorys found try again
+  const paths = categories.flatMap(category =>
+    subcategories.map(subcategory => ({
+      params: { category, subcategory },
+    }))
+  );
 
-    // get data 
-    const fetchProducts = async () => {
-      try {
-        const response = await axios.get(`https://shop-interview.acrowd.se/wp-json/wc/v3/products`, {
-          auth: {
-            username: 'ck_4c0d8a4f83c78831c200e39d1f371e92d419d863',
-            password: 'cs_1eb6c96b9a32942b52a868da3ad28698b15873ff',
-          },
-          params: { per_page: 20 },
-        });
+  return { paths, fallback: 'blocking' };
+}
 
-        const allProducts = response.data;
-        const filteredProducts = allProducts.filter(product => {
-          const productCategories = product.categories.map(cat => cat.name.toLowerCase());
-          return productCategories.includes(category.toLowerCase()) && productCategories.includes(subcategory.toLowerCase());
-        });
+export async function getStaticProps({ params }) {
+  const { category, subcategory } = params;
+  const products = await fetchProducts(category, subcategory);
 
-        setProducts(filteredProducts);
-        setLoading(false);
-      } catch (error) {
-        setError(error);
-        setLoading(false);
-      }
-    };
+  return {
+    props: {
+      products,
+      category,
+      subcategory,
+    },
+    revalidate: 10,
+  };
+}
 
-    fetchProducts();
-  }, [category, subcategory]);
-
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error.message}</p>;
+const SubcategoryPage = ({ products, category, subcategory }) => {
+  const router = useRouter();
 
   return (
     <div>
@@ -62,7 +52,10 @@ const SubcategoryPage = () => {
             <Link href={`/product/${product.slug}`}>
               <a className={styles.imageContainer}>
                 {product.images && product.images.length > 0 && (
-                  <img src={product.images[0].src} alt={product.name} />
+                  <ImageComponent
+                    src={product.images[0].src}
+                    alt={product.name}
+                  />
                 )}
               </a>
             </Link>
@@ -94,5 +87,4 @@ const SubcategoryPage = () => {
   );
 };
 
-// makes easy to import
 export default SubcategoryPage;
