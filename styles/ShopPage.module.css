@@ -39,8 +39,9 @@
 
 .imageContainer {
   width: 100%;
-  padding-top: 100%; /* 1:1 Aspect Ratio */
   position: relative;
+  height: 300px; /* Set a fixed height */
+  overflow: hidden; /* Hide any overflow */
 }
 
 .imageContainer .image {
@@ -76,6 +77,12 @@
 
 .productItem a:hover {
   text-decoration: underline;
+}
+
+.productImage {
+  object-fit: cover; /* Ensure image covers the container while maintaining aspect ratio */
+  width: 100%;
+  height: 100%;
 }
 
 /* Mobile */
