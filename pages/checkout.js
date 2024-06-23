@@ -3,6 +3,8 @@ import { useRouter } from 'next/router';
 import axios from 'axios';
 import Head from 'next/head';
 import styles from '../styles/CheckoutPage.module.css'; // Ensure correct path
+import ImageComponent from './api/ImageComponent'; // Correct path
+import { fetchCart } from './api/fetchProducts'; // Import the new function
 
 const CheckoutPage = () => {
   const [cart, setCart] = useState([]); // gets cart
@@ -15,24 +17,31 @@ const CheckoutPage = () => {
   const router = useRouter(); // navigation
 
   useEffect(() => {
-    // Fetch cart data from localStorage
-    const savedCart = JSON.parse(localStorage.getItem('cart')) || [];
-    setCart(savedCart);
-    const cartTotal = savedCart.reduce((sum, item) => sum + item.price * item.quantity, 0);
-    setTotal(cartTotal.toFixed(2));
+    const getCartData = async () => {
+      const savedCart = JSON.parse(localStorage.getItem('cart')) || [];
+      try {
+        const { cart, total } = await fetchCart(savedCart);
+        setCart(cart);
+        setTotal(total);
+      } catch (error) {
+        console.error('Error fetching cart data', error);
+      }
+    };
+
+    getCartData();
   }, []);
 
-// manage changes in fields
+  // manage changes in fields
   const handleChange = (e) => { 
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
-  
-// manages the submit to store
+
+  // manages the submit to store
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const orderData = { //sets biling/shiping/payment. Change in real case
+    const orderData = { //sets billing/shipping/payment. Change in real case
       payment_method: "paypal",
       payment_method_title: "PayPal",
       set_paid: true,
@@ -64,7 +73,7 @@ const CheckoutPage = () => {
       })),
     };
 
-    // sents order to acrowd shop
+    // sends order to acrowd shop
     try {
       const response = await axios.post('https://shop-interview.acrowd.se/wp-json/wc/v3/orders', orderData, {
         auth: {
@@ -131,6 +140,11 @@ const CheckoutPage = () => {
           <div className={styles.summaryItems}>
             {cart.map((item) => (
               <div key={item.id} className={styles.summaryItem}>
+                <ImageComponent
+                  src={item.image}
+                  alt={item.name}
+                  style={{ width: '50px', height: '50px', marginRight: '10px' }} // Apply styles for checkout product images
+                />
                 <span>{item.name} x {item.quantity}</span>
                 <span>${(item.price * item.quantity).toFixed(2)}</span>
               </div>

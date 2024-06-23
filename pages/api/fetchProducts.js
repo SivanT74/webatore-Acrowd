@@ -78,3 +78,13 @@ export const fetchRelatedProducts = async (categoryId, currentProductId) => {
     throw new Error('Failed to fetch related products: ' + error.message);
   }
 };
+
+// New function to fetch cart data
+export const fetchCart = async (cart) => {
+  try {
+    const cartTotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+    return { cart, total: cartTotal.toFixed(2) };
+  } catch (error) {
+    throw new Error('Failed to fetch cart data: ' + error.message);
+  }
+};
