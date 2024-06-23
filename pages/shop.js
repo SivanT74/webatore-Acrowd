@@ -2,9 +2,9 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import Head from 'next/head';
-import Image from 'next/image';
 import styles from '../styles/ShopPage.module.css';
-import { fetchProducts } from './api/fetchProducts'; 
+import { fetchProducts } from './api/fetchProducts';
+import ImageComponent from '../components/ImageComponent'; // Adjust the path as necessary
 
 export async function getStaticProps() {
   const productsData = await fetchProducts();
@@ -42,18 +42,9 @@ const IndexPage = ({ products }) => {
                 {product.images && product.images.length > 0 && (
                   <>
                     {console.log('Image URL:', product.images[0].src)}
-                    <Image
+                    <ImageComponent
                       src={product.images[0].src}
                       alt={product.name}
-                      layout="fill"
-                      objectFit="cover"
-                      quality={75}
-                      sizes="(max-width: 768px) 100vw, 
-                             (max-width: 1200px) 50vw, 
-                             33vw"
-                      placeholder="blur"
-                      blurDataURL="/placeholder.webp"
-                      loading="lazy"
                     />
                   </>
                 )}
