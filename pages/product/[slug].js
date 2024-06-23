@@ -1,84 +1,39 @@
-import axios from 'axios';
-import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import Head from 'next/head';
 import styles from '../../styles/SlugPage.module.css'; // Ensure correct path
+import { fetchProductBySlug, fetchRelatedProducts } from '../api/fetchProducts';
+import ImageComponent from '../api/ImageComponent'; // Adjust the path as necessary
 import { dispatchCartUpdateEvent } from '../../components/cartUtils'; // Import the utility function
 
-const ProductPage = () => {
-  const [product, setProduct] = useState(null); // makes product start as null
-  const [relatedProducts, setRelatedProducts] = useState([]); // for related products
-  const [loading, setLoading] = useState(true); // loading
-  const [error, setError] = useState(null); // for if error
+export async function getStaticPaths() {
+  const products = await fetchProducts();
+  const paths = products.map((product) => ({
+    params: { slug: product.slug },
+  }));
+
+  return { paths, fallback: 'blocking' };
+}
+
+export async function getStaticProps({ params }) {
+  const { slug } = params;
+  const product = await fetchProductBySlug(slug);
+
+  const relatedProducts = await fetchRelatedProducts(product.categories[0].id, product.id);
+
+  return {
+    props: {
+      product,
+      relatedProducts,
+    },
+    revalidate: 10,
+  };
+}
+
+const ProductPage = ({ product, relatedProducts }) => {
+  const router = useRouter();
   const [quantity, setQuantity] = useState(1); // sets quantity to 1
   const [currentImageIndex, setCurrentImageIndex] = useState(0); // makes the 1st img in list appear first
-  const router = useRouter(); // navigation
-  const { slug } = router.query; // unique slug navigation
-
-  useEffect(() => {
-    if (!slug) return;
-
-    const fetchProduct = async () => { // makes connection
-      try {
-        const consumerKey = 'ck_4c0d8a4f83c78831c200e39d1f371e92d419d863';
-        const consumerSecret = 'cs_1eb6c96b9a32942b52a868da3ad28698b15873ff';
-        const apiUrl = `https://shop-interview.acrowd.se/wp-json/wc/v3/products?slug=${slug}`;
-
-        const response = await axios.get(apiUrl, {
-          auth: {
-            username: consumerKey,
-            password: consumerSecret,
-          },
-        });
-
-        // if we get data
-        if (response.data.length > 0) { 
-          const productData = response.data[0];
-          setProduct(productData);
-          setCurrentImageIndex(0); // Reset currentImageIndex whenever a new product is loaded
-
-          const mainCategoryId = productData.categories[0].id; // Get the main category ID
-          fetchRelatedProducts(mainCategoryId, productData); // Fetch related products based on the main category ID
-        } else {
-          setError('Product not found');
-        }
-        setLoading(false);
-      } catch (error) {
-        setError(error);
-        setLoading(false);
-      }
-    };
-
-    // gets related products
-    const fetchRelatedProducts = async (categoryId, currentProduct) => {
-      try {
-        const consumerKey = 'ck_4c0d8a4f83c78831c200e39d1f371e92d419d863';
-        const consumerSecret = 'cs_1eb6c96b9a32942b52a868da3ad28698b15873ff';
-        const apiUrl = `https://shop-interview.acrowd.se/wp-json/wc/v3/products`;
-
-        const response = await axios.get(apiUrl, {
-          auth: {
-            username: consumerKey,
-            password: consumerSecret,
-          },
-          params: {
-            category: categoryId,
-            per_page: 5, // Adjust the number of related products to display
-          },
-        });
-
-        // Filter out the current product from the related products list
-        const filteredProducts = response.data.filter(product => product.id !== currentProduct.id);
-
-        setRelatedProducts(filteredProducts);
-      } catch (error) {
-        setError(error);
-      }
-    };
-
-    fetchProduct();
-  }, [slug]);
 
   // handles quantity change
   const handleQuantityChange = (change) => {
@@ -102,7 +57,7 @@ const ProductPage = () => {
         name: product.name,
         image: product.images[0]?.src,
         price: parseFloat(product.price), // Ensure price is a number
-        quantity: quantity
+        quantity: quantity,
       });
     }
 
@@ -119,14 +74,6 @@ const ProductPage = () => {
   const handleNextImage = () => {
     setCurrentImageIndex((prevIndex) => (prevIndex + 1) % product.images.length);
   };
-
-  if (loading) {
-    return <p>Loading...</p>;
-  }
-
-  if (error) {
-    return <p>Error: {error.message}</p>;
-  }
 
   // sets breadcrumbs
   const breadcrumb = `Shop / ${product.categories.map(cat => cat.name).join(' / ')}`;
@@ -194,7 +141,10 @@ const ProductPage = () => {
             <div key={relatedProduct.id} className={styles.relatedProductItem}>
               <Link href={`/product/${relatedProduct.slug}`}>
                 <a>
-                  <img src={relatedProduct.images[0]?.src} alt={relatedProduct.name} />
+                  <ImageComponent
+                    src={relatedProduct.images[0]?.src}
+                    alt={relatedProduct.name}
+                  />
                   <p className={styles.relatedProductName}>{relatedProduct.name}</p>
                   <p className={styles.relatedProductPrice}>
                     {relatedProduct.sale_price ? (

@@ -37,3 +37,44 @@ export const fetchProducts = async (category = null, subcategory = null) => {
     throw new Error('Failed to fetch products: ' + error.message);
   }
 };
+
+export const fetchProductBySlug = async (slug) => {
+  try {
+    const response = await axios.get(apiUrl, {
+      auth: {
+        username: consumerKey,
+        password: consumerSecret,
+      },
+      params: {
+        slug,
+      },
+    });
+
+    if (response.data.length === 0) {
+      throw new Error('Product not found');
+    }
+
+    return response.data[0];
+  } catch (error) {
+    throw new Error('Failed to fetch product: ' + error.message);
+  }
+};
+
+export const fetchRelatedProducts = async (categoryId, currentProductId) => {
+  try {
+    const response = await axios.get(apiUrl, {
+      auth: {
+        username: consumerKey,
+        password: consumerSecret,
+      },
+      params: {
+        category: categoryId,
+        per_page: 5,
+      },
+    });
+
+    return response.data.filter(product => product.id !== currentProductId);
+  } catch (error) {
+    throw new Error('Failed to fetch related products: ' + error.message);
+  }
+};
