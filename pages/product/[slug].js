@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'; // Import useState and useEffect
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import Head from 'next/head';
@@ -35,6 +35,18 @@ const ProductPage = ({ product, relatedProducts }) => {
   const router = useRouter();
   const [quantity, setQuantity] = useState(1); // sets quantity to 1
   const [currentImageIndex, setCurrentImageIndex] = useState(0); // makes the 1st img in list appear first
+  const [strippedDescription, setStrippedDescription] = useState("");
+
+  useEffect(() => {
+    // removes <p> tags from description
+    const stripHtmlTags = (html) => {
+      const tmp = document.createElement("DIV");
+      tmp.innerHTML = html;
+      return tmp.textContent || tmp.innerText || "";
+    };
+
+    setStrippedDescription(stripHtmlTags(product.short_description));
+  }, [product]);
 
   // handles quantity change
   const handleQuantityChange = (change) => {
@@ -79,13 +91,6 @@ const ProductPage = ({ product, relatedProducts }) => {
   // sets breadcrumbs
   const breadcrumb = `Shop / ${product.categories.map(cat => cat.name).join(' / ')}`;
 
-  // removes <p> tags from description
-  const stripHtmlTags = (html) => {
-    const tmp = document.createElement("DIV");
-    tmp.innerHTML = html;
-    return tmp.textContent || tmp.innerText || "";
-  };
-
   return (
     <div className={styles.productPage}>
       <Head>
@@ -124,7 +129,7 @@ const ProductPage = ({ product, relatedProducts }) => {
               <span>${product.price}</span>
             )}
           </div>
-          <p>{stripHtmlTags(product.short_description)}</p>
+          <p>{strippedDescription}</p>
           <div className={styles.addToCartContainer}>
             <div className={styles.quantitySelector}>
               <button onClick={() => handleQuantityChange(-1)}>-</button>
