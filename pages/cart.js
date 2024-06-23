@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import Link from 'next/link';
 import Head from 'next/head';
 import styles from '../styles/cartPage.module.css'; // Ensure correct path
+import ImageComponent from '../api/ImageComponent'; // Adjust the path as necessary
 import { dispatchCartUpdateEvent } from '../components/cartUtils'; // Import the utility function
 
 const CartPage = () => {
@@ -70,7 +71,11 @@ const CartPage = () => {
                   <td className={styles.cartItemImage}>
                     <Link href={`/product/${item.slug}`}>
                       <a>
-                        <img src={item.image} alt={item.name} />
+                        <ImageComponent
+                          src={item.image}
+                          alt={item.name}
+                          style={{ width: '150px', height: '150px' }} // Apply styles for cart product images
+                        />
                       </a>
                     </Link>
                   </td>
