@@ -101,7 +101,7 @@ const ProductPage = ({ product, relatedProducts }) => {
       <meta property="og:type" content="product" />
       <meta property="og:title" content={`Buy ${product.name} - Our Shop`} />
       <meta property="og:description" content={`View details of ${product.name}. Add to cart and explore related products.`} />
-      <meta property="og:image" content={product.images[0]?.src} />
+      <meta property="og:image" content={`https://ogcdn.net/6064b869-74ed-4eb9-b76c-0b701ffe7e6b/v4/webstore-acrowd.vercel.app/Buy%20${encodeURIComponent(product.name)}%20-%20Our%20Shop/${encodeURIComponent(product.images[0]?.src)}%20/og.png`} />
 
       <meta name="twitter:card" content="summary_large_image" />
       <meta property="twitter:domain" content="webstore-acrowd.vercel.app" />
