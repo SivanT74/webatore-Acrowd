@@ -143,11 +143,6 @@ const CheckoutPage = () => {
           <div className={styles.summaryItems}>
             {cart.map((item) => (
               <div key={item.id} className={styles.summaryItem}>
-                <ImageComponent
-                  src={item.image}
-                  alt={item.name}
-                  style={{ width: '50px', height: '50px', marginRight: '10px' }} // Apply styles for checkout product images
-                />
                 <span>{item.name} x {item.quantity}</span>
                 <span>${(item.price * item.quantity).toFixed(2)}</span>
               </div>
