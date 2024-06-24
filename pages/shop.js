@@ -24,7 +24,20 @@ const IndexPage = ({ products }) => {
     <div>
       <Head>
         <title>Shop - Your Online Store</title>
-        <meta name="description" content="Browse a wide range of products in our online store. Find the best deals on accessories, men's clothing, and women's clothing." />
+        <meta name="description" content="Explore our wide range of products and find what you need. Shop now and enjoy great deals!" />
+        
+        <meta property="og:url" content="https://webstore-acrowd.vercel.app/shop" />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="Shop - Our Products" />
+        <meta property="og:description" content="Explore our wide range of products and find what you need. Shop now and enjoy great deals!" />
+        <meta property="og:image" content={`https://ogcdn.net/6064b869-74ed-4eb9-b76c-0b701ffe7e6b/v4/webstore-acrowd.vercel.app/Buy%20${encodeURIComponent(defaultProductName)}%20-%20Our%20Shop/${encodeURIComponent(defaultImage)}%20/og.png`} />
+        
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta property="twitter:domain" content="webstore-acrowd.vercel.app" />
+        <meta property="twitter:url" content="https://webstore-acrowd.vercel.app/shop" />
+        <meta name="twitter:title" content="Shop - Our Products" />
+        <meta name="twitter:description" content="Explore our wide range of products and find what you need. Shop now and enjoy great deals!" />
+        <meta name="twitter:image" content={`https://ogcdn.net/6064b869-74ed-4eb9-b76c-0b701ffe7e6b/v4/webstore-acrowd.vercel.app/Buy%20${encodeURIComponent(defaultProductName)}%20-%20Our%20Shop/${encodeURIComponent(defaultImage)}%20/og.png`} />
       </Head>
       <header className={styles.header}>
         <h1>Shop</h1>
