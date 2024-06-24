@@ -40,6 +40,9 @@ const SubcategoryPage = ({ products, category, subcategory }) => {
   const firstProductImage = products.length > 0 ? products[0].images[0]?.src : '/placeholder.webp';
   const defaultProductName = products.length > 0 ? products[0].name : 'Product';
 
+  // Construct the URL for the image
+  const ogImageUrl = `https://ogcdn.net/6064b869-74ed-4eb9-b76c-0b701ffe7e6b/webstore-acrowd.vercel.app/Buy%20${encodeURIComponent(defaultProductName)}%20-%20Our%20Shop/${encodeURIComponent(firstProductImage)}%20/og.png`;
+
   return (
     <div>
       <Head>
@@ -50,14 +53,14 @@ const SubcategoryPage = ({ products, category, subcategory }) => {
         <meta property="og:type" content="website" />
         <meta property="og:title" content={`${category.charAt(0).toUpperCase() + category.slice(1)} - ${subcategory.charAt(0).toUpperCase() + subcategory.slice(1)} - Shop`} />
         <meta property="og:description" content={`Browse products in the ${subcategory} category of ${category}.`} />
-        <meta property="og:image" content={`https://ogcdn.net/6064b869-74ed-4eb9-b76c-0b701ffe7e6b/webstore-acrowd.vercel.app/Buy%20${encodeURIComponent(defaultProductName)}%20-%20Our%20Shop/${encodeURIComponent(firstProductImage)}/og.png`} />
+        <meta property="og:image" content={ogImageUrl} />
         
         <meta name="twitter:card" content="summary_large_image" />
         <meta property="twitter:domain" content="webstore-acrowd.vercel.app" />
         <meta property="twitter:url" content={`https://webstore-acrowd.vercel.app/category/${category}/${subcategory}`} />
         <meta name="twitter:title" content={`${category.charAt(0).toUpperCase() + category.slice(1)} - ${subcategory.charAt(0).toUpperCase() + subcategory.slice(1)} - Shop`} />
         <meta name="twitter:description" content={`Browse products in the ${subcategory} category of ${category}.`} />
-        <meta name="twitter:image" content={`https://ogcdn.net/6064b869-74ed-4eb9-b76c-0b701ffe7e6b/webstore-acrowd.vercel.app/Buy%20${encodeURIComponent(defaultProductName)}%20-%20Our%20Shop/${encodeURIComponent(firstProductImage)}/og.png`} />
+        <meta name="twitter:image" content={ogImageUrl} />
       </Head>
       <header className={styles.header}>
         <button className={styles.backButton} onClick={() => router.push(`/category/${category}`)}>{'<'}</button>
