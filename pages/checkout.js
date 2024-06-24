@@ -99,6 +99,19 @@ const CheckoutPage = () => {
       <Head>
         <title>Checkout - Your Shopping Cart</title>
         <meta name="description" content="Complete your purchase by providing your information." />
+        
+        <meta property="og:url" content="https://webstore-acrowd.vercel.app/checkout" />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="Checkout - Your Shopping Cart" />
+        <meta property="og:description" content="Complete your purchase by providing your information." />
+        <meta property="og:image" content="/placeholder.webp" />
+        
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta property="twitter:domain" content="webstore-acrowd.vercel.app" />
+        <meta property="twitter:url" content="https://webstore-acrowd.vercel.app/checkout" />
+        <meta name="twitter:title" content="Checkout - Your Shopping Cart" />
+        <meta name="twitter:description" content="Complete your purchase by providing your information." />
+        <meta name="twitter:image" content="/placeholder.webp" />
       </Head>
       <h1>Checkout</h1>
       <form onSubmit={handleSubmit}>
