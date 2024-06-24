@@ -20,6 +20,11 @@ export async function getStaticProps() {
 const IndexPage = ({ products }) => {
   const router = useRouter();
 
+  // Default values for meta tags
+  const defaultProduct = products.length > 0 ? products[0] : null;
+  const defaultImage = defaultProduct ? defaultProduct.images[0]?.src : '/placeholder.webp';
+  const defaultProductName = defaultProduct ? defaultProduct.name : 'Our Products';
+
   return (
     <div>
       <Head>
@@ -53,13 +58,10 @@ const IndexPage = ({ products }) => {
             <Link href={`/product/${product.slug}`}>
               <a className={styles.imageContainer}>
                 {product.images && product.images.length > 0 && (
-                  <>
-                    {console.log('Image URL:', product.images[0].src)}
-                    <ImageComponent
-                      src={product.images[0].src}
-                      alt={product.name}
-                    />
-                  </>
+                  <ImageComponent
+                    src={product.images[0].src}
+                    alt={product.name}
+                  />
                 )}
               </a>
             </Link>
