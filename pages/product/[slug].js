@@ -101,7 +101,7 @@ const ProductPage = ({ product, relatedProducts }) => {
       <meta property="og:type" content="product" />
       <meta property="og:title" content={`Buy ${product.name} - Our Shop`} />
       <meta property="og:description" content={`View details of ${product.name}. Add to cart and explore related products.`} />
-      <meta property="og:image" content={product.images[0]?.src} />
+      <meta property="og:image" content="https://ogcdn.net/c078a98b-9a33-4eaf-a5cf-e5ebf3ea450c/v1/webstore-acrowd.vercel.app/Welcome%20to%20Our%20Shop/Discover%20our%20wide%20range%20of%20products%20and%20amazing%20deals.%20Shop%20now%20at%20our%20online%20store.//og.png" />
 
       <meta name="twitter:card" content="summary_large_image" />
       <meta property="twitter:domain" content="webstore-acrowd.vercel.app" />
@@ -109,7 +109,7 @@ const ProductPage = ({ product, relatedProducts }) => {
       <meta name="twitter:title" content={`Buy ${product.name} - Our Shop`} />
       <meta name="twitter:description" content={`View details of ${product.name}. Add to cart and explore related products.`} />
       <meta name="twitter:image" content={product.images[0]?.src} />
-      <meta name="twitter:image" content="https://ogcdn.net/c078a98b-9a33-4eaf-a5cf-e5ebf3ea450c/v1/webstore-acrowd.vercel.app/Welcome%20to%20Our%20Shop/Discover%20our%20wide%20range%20of%20products%20and%20amazing%20deals.%20Shop%20now%20at%20our%20online%20store./{product.images[0]?.src}/og.png" />
+      <meta name="twitter:image" content="https://ogcdn.net/c078a98b-9a33-4eaf-a5cf-e5ebf3ea450c/v1/webstore-acrowd.vercel.app/Welcome%20to%20Our%20Shop/Discover%20our%20wide%20range%20of%20products%20and%20amazing%20deals.%20Shop%20now%20at%20our%20online%20store.//og.png" />
       </Head>
       <button className={styles.backButton} onClick={() => router.push('/')}>{'<'}</button>
       <div className={styles.productDetail}>
