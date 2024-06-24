@@ -55,14 +55,14 @@ const CartPage = () => {
         <meta property="og:type" content="website" />
         <meta property="og:title" content="Cart - Your Shopping Cart" />
         <meta property="og:description" content="View and manage the items in your shopping cart. Adjust quantities or remove items before proceeding to checkout." />
-        <meta property="og:image" content={defaultImage} />
+        <meta property="og:image" content="/placeholder.webp" />
         
         <meta name="twitter:card" content="summary_large_image" />
         <meta property="twitter:domain" content="webstore-acrowd.vercel.app" />
         <meta property="twitter:url" content="https://webstore-acrowd.vercel.app/cart" />
         <meta name="twitter:title" content="Cart - Your Shopping Cart" />
         <meta name="twitter:description" content="View and manage the items in your shopping cart. Adjust quantities or remove items before proceeding to checkout." />
-        <meta name="twitter:image" content={defaultImage} />
+        <meta name="twitter:image" content="/placeholder.webp" />
       </Head>
       <button className={styles.backButton} onClick={() => router.push('/shop')}>{'<'}</button>
       <p className={styles.cartHeader}>Cart</p>
