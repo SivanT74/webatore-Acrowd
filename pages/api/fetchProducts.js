@@ -1,9 +1,12 @@
 // fetchProducts.js
 import axios from 'axios';
+import dotenv from 'dotenv';
 
-const consumerKey = 'ck_4c0d8a4f83c78831c200e39d1f371e92d419d863';
-const consumerSecret = 'cs_1eb6c96b9a32942b52a868da3ad28698b15873ff';
-const apiUrl = 'https://shop-interview.acrowd.se/wp-json/wc/v3/products';
+dotenv.config();
+
+const consumerKey = process.env.CONSUMER_KEY;
+const consumerSecret = process.env.CONSUMER_SECRET;
+const apiUrl = process.env.API_URL;
 
 export const fetchProducts = async (category = null, subcategory = null) => {
   try {
@@ -19,7 +22,7 @@ export const fetchProducts = async (category = null, subcategory = null) => {
     });
 
     let products = response.data;
-    
+
     if (category) {
       products = products.filter(product =>
         product.categories.some(cat => cat.name.toLowerCase() === category.toLowerCase())
@@ -31,7 +34,7 @@ export const fetchProducts = async (category = null, subcategory = null) => {
         product.categories.some(cat => cat.name.toLowerCase() === subcategory.toLowerCase())
       );
     }
-    
+
     return products.filter(product => product.images && product.images.length > 0);
   } catch (error) {
     throw new Error('Failed to fetch products: ' + error.message);
