@@ -1,10 +1,9 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import axios from 'axios';
 import Head from 'next/head';
 import styles from '../styles/CheckoutPage.module.css'; // Ensure correct path
 import ImageComponent from './api/ImageComponent'; // Correct path
-import { fetchCart } from './api/fetchProducts'; // Import the new function
+import { fetchCart, submitOrder } from './api/fetchProducts'; // Import the new function
 
 const CheckoutPage = () => {
   const [cart, setCart] = useState([]); // gets cart
@@ -75,19 +74,10 @@ const CheckoutPage = () => {
 
     // sends order to acrowd shop
     try {
-      const response = await axios.post('https://shop-interview.acrowd.se/wp-json/wc/v3/orders', orderData, {
-        auth: {
-          username: 'ck_4c0d8a4f83c78831c200e39d1f371e92d419d863',
-          password: 'cs_1eb6c96b9a32942b52a868da3ad28698b15873ff'
-        }
-      });
-      if (response.status === 201) {
-        alert('Order placed successfully!');
-        localStorage.removeItem('cart');
-        router.push('/');
-      } else {
-        alert('There was an issue with your order.');
-      }
+      const orderResponse = await submitOrder(orderData);
+      alert('Order placed successfully!');
+      localStorage.removeItem('cart');
+      router.push('/');
     } catch (error) {
       console.error('Error placing order', error);
       alert('There was an issue with your order.');

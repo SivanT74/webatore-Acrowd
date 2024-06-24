@@ -1,8 +1,8 @@
-// /pages/api/fetchProducts.js
+// fetchProducts.js
 import axios from 'axios';
 
-const consumerKey = 'ck_4c0d8a4f83c78831c200e39d1f371e92d419d863'; 
-const consumerSecret = 'cs_1eb6c96b9a32942b52a868da3ad28698b15873ff'; 
+const consumerKey = 'ck_4c0d8a4f83c78831c200e39d1f371e92d419d863';
+const consumerSecret = 'cs_1eb6c96b9a32942b52a868da3ad28698b15873ff';
 const apiUrl = 'https://shop-interview.acrowd.se/wp-json/wc/v3/products';
 
 export const fetchProducts = async (category = null, subcategory = null) => {
@@ -14,7 +14,7 @@ export const fetchProducts = async (category = null, subcategory = null) => {
       },
       params: {
         per_page: 20,
-        fields: 'id,name,price,sale_price,regular_price,images,slug,categories', // include categories
+        fields: 'id,name,price,sale_price,regular_price,images,slug,categories',
       },
     });
 
@@ -79,12 +79,31 @@ export const fetchRelatedProducts = async (categoryId, currentProductId) => {
   }
 };
 
-// New function to fetch cart data
 export const fetchCart = async (cart) => {
   try {
     const cartTotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
     return { cart, total: cartTotal.toFixed(2) };
   } catch (error) {
     throw new Error('Failed to fetch cart data: ' + error.message);
+  }
+};
+
+// New function to submit the order
+export const submitOrder = async (orderData) => {
+  try {
+    const response = await axios.post('https://shop-interview.acrowd.se/wp-json/wc/v3/orders', orderData, {
+      auth: {
+        username: consumerKey,
+        password: consumerSecret
+      }
+    });
+
+    if (response.status !== 201) {
+      throw new Error('There was an issue with your order.');
+    }
+
+    return response.data;
+  } catch (error) {
+    throw new Error('Failed to submit order: ' + error.message);
   }
 };
