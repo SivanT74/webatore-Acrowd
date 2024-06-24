@@ -96,6 +96,19 @@ const ProductPage = ({ product, relatedProducts }) => {
       <Head>
         <title>{product.name} - Your Shopping Cart</title>
         <meta name="description" content={`View details of ${product.name}. Add to cart and explore related products.`} />
+        
+        <meta property="og:url" content="https://webstore-acrowd.vercel.app/" />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="Welcome to Our Shop" />
+        <meta property="og:description" content="Discover our wide range of products and amazing deals. Shop now at our online store." />
+        <meta property="og:image" content="/placeholder.webp" />
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta property="twitter:domain" content="webstore-acrowd.vercel.app" />
+        <meta property="twitter:url" content="https://webstore-acrowd.vercel.app/" />
+        <meta name="twitter:title" content="Welcome to Our Shop" />
+        <meta name="twitter:description" content="Discover our wide range of products and amazing deals. Shop now at our online store." />
+        <meta name="twitter:image" content="/placeholder.webp" />
       </Head>
       <button className={styles.backButton} onClick={() => router.push('/')}>{'<'}</button>
       <div className={styles.productDetail}>
