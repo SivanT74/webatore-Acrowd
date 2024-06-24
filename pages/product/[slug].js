@@ -91,6 +91,11 @@ const ProductPage = ({ product, relatedProducts }) => {
   // sets breadcrumbs
   const breadcrumb = `Shop / ${product.categories.map(cat => cat.name).join(' / ')}`;
 
+  // Ensure the image URL is correctly formatted
+  const productImageUrl = product.images[0]?.src.startsWith('http')
+    ? product.images[0].src
+    : `https://yourwebsite.com${product.images[0]?.src}`;
+
   return (
     <div className={styles.productPage}>
       <Head>
@@ -101,14 +106,14 @@ const ProductPage = ({ product, relatedProducts }) => {
       <meta property="og:type" content="product" />
       <meta property="og:title" content={`Buy ${product.name} - Our Shop`} />
       <meta property="og:description" content={`View details of ${product.name}. Add to cart and explore related products.`} />
-      <meta property="og:image" content={`https://ogcdn.net/6064b869-74ed-4eb9-b76c-0b701ffe7e6b/v4/webstore-acrowd.vercel.app/Buy%20${encodeURIComponent(product.name)}%20-%20Our%20Shop/${encodeURIComponent(product.images[0]?.src)}%20/og.png`} />
+      <meta property="og:image" content={productImageUrl} />
 
       <meta name="twitter:card" content="summary_large_image" />
       <meta property="twitter:domain" content="webstore-acrowd.vercel.app" />
       <meta property="twitter:url" content={`https://webstore-acrowd.vercel.app/product/${product.slug}`} />
       <meta name="twitter:title" content={`Buy ${product.name} - Our Shop`} />
       <meta name="twitter:description" content={`View details of ${product.name}. Add to cart and explore related products.`} />
-      <meta name="twitter:image" content={`https://ogcdn.net/6064b869-74ed-4eb9-b76c-0b701ffe7e6b/v4/webstore-acrowd.vercel.app/Buy%20${encodeURIComponent(product.name)}%20-%20Our%20Shop/${encodeURIComponent(product.images[0]?.src)}%20/og.png`} />
+      <meta name="twitter:image" content={productImageUrl} />
 
       </Head>
       <button className={styles.backButton} onClick={() => router.push('/')}>{'<'}</button>
