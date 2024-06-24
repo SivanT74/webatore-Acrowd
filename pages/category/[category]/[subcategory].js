@@ -37,8 +37,9 @@ const SubcategoryPage = ({ products, category, subcategory }) => {
   const router = useRouter();
 
   // Get the first product's image as the default image for meta tags
-  const firstProductImage = products.length > 0 ? product.images[0].src : '/placeholder.webp';
-  const defaultProductName = products.length > 0 ? products[0].name : 'Product';
+  const firstProduct = products.length > 0 ? products[0] : null;
+  const firstProductImage = firstProduct ? firstProduct.images[0]?.src : '/placeholder.webp';
+  const defaultProductName = firstProduct ? firstProduct.name : 'Product';
 
   // Construct the URL for the image
   const ogImageUrl = `https://ogcdn.net/6064b869-74ed-4eb9-b76c-0b701ffe7e6b/webstore-acrowd.vercel.app/Buy%20${encodeURIComponent(defaultProductName)}%20-%20Our%20Shop/${encodeURIComponent(firstProductImage)}%20/og.png`;
