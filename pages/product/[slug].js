@@ -108,7 +108,8 @@ const ProductPage = ({ product, relatedProducts }) => {
       <meta property="twitter:url" content={`https://webstore-acrowd.vercel.app/product/${product.slug}`} />
       <meta name="twitter:title" content={`Buy ${product.name} - Our Shop`} />
       <meta name="twitter:description" content={`View details of ${product.name}. Add to cart and explore related products.`} />
-      <meta name="twitter:image" content={product.images[0]?.src} />
+      <meta name="twitter:image" content={`https://ogcdn.net/6064b869-74ed-4eb9-b76c-0b701ffe7e6b/v4/webstore-acrowd.vercel.app/Buy%20${encodeURIComponent(product.name)}%20-%20Our%20Shop/${encodeURIComponent(product.images[0]?.src)}%20/og.png`} />
+
       </Head>
       <button className={styles.backButton} onClick={() => router.push('/')}>{'<'}</button>
       <div className={styles.productDetail}>
