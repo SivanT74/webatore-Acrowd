@@ -37,7 +37,7 @@ const SubcategoryPage = ({ products, category, subcategory }) => {
   const router = useRouter();
 
   // Get the first product's image as the default image for meta tags
-  const firstProductImage = products.length > 0 ? products[0].images[0]?.src : '/placeholder.webp';
+  const firstProductImage = products.length > 0 ? product.images[0].src : '/placeholder.webp';
   const defaultProductName = products.length > 0 ? products[0].name : 'Product';
 
   // Construct the URL for the image
