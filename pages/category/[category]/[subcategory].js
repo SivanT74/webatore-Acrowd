@@ -54,14 +54,14 @@ const SubcategoryPage = ({ products, category, subcategory }) => {
         <meta property="og:type" content="website" />
         <meta property="og:title" content={`${category.charAt(0).toUpperCase() + category.slice(1)} - ${subcategory.charAt(0).toUpperCase() + subcategory.slice(1)} - Shop`} />
         <meta property="og:description" content={`Browse products in the ${subcategory} category of ${category}.`} />
-        <meta property="og:image" content={ogImageUrl} />
+        <meta property="og:image" content="/placeholder.webp" />
         
         <meta name="twitter:card" content="summary_large_image" />
         <meta property="twitter:domain" content="webstore-acrowd.vercel.app" />
         <meta property="twitter:url" content={`https://webstore-acrowd.vercel.app/category/${category}/${subcategory}`} />
         <meta name="twitter:title" content={`${category.charAt(0).toUpperCase() + category.slice(1)} - ${subcategory.charAt(0).toUpperCase() + subcategory.slice(1)} - Shop`} />
         <meta name="twitter:description" content={`Browse products in the ${subcategory} category of ${category}.`} />
-        <meta name="twitter:image" content={ogImageUrl} />
+        <meta name="twitter:image" content="/placeholder.webp" />
       </Head>
       <header className={styles.header}>
         <button className={styles.backButton} onClick={() => router.push(`/category/${category}`)}>{'<'}</button>
